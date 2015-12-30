@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<link rel="stylesheet" type="text/css" href="../../style.css">
+	<meta name="description" content="Random Number Generator">
+	<meta name="keywords" content="Zachary Hartig tools random number generator">
+	<meta name="author" content="Zachary Hartig">
+	<meta charset="UTF-8">
+	<style>
+		h1 {text-align: center;}
+		p {text-align: center;}
+		button {text-align: center;}
+
+	</style>
+</head>
+<body>
+	<h1>Random Number Generator</h1>
+	<p>Lower Bound: <input id="lowerBound" type="text" value="1"><br></p>
+	<p>Upper Bound: <input id="upperBound" type="text" value="6"><br></p>
+	<p>Number to generate: <input id="num" type="text" value="1"><br></p>
+	<p><button type="button" onclick="getRand()">Random Number</button><br></p>
+	<p id="randNum"></p>
+
+	<script>
+	"use strict";
+	function getRand() {
+		var message, n, lower, upper ,i=0;
+		message=document.getElementById("randNum");
+		message.innerHTML="";
+		lower=document.getElementById("lowerBound").value;
+		upper=document.getElementById("upperBound").value;
+		n=document.getElementById("num").value;
+		try {
+			if(lower=="") throw "Lower field is empty";
+			if(isNaN(lower)) throw "Lower field is not a number";
+			lower=Math.floor(Number(lower));
+			if(upper=="") throw "Upper field is empty";
+			if(isNaN(upper)) throw "Upper field is not a number";
+			upper=Math.floor(Number(upper));
+			if(n=="") throw "Number to generate field is empty";
+			if(isNaN(n)) throw "Number to generate field is not a number";
+			n=Math.floor(Number(n));
+			if(upper<=lower) throw "Upper value is too low";
+			if(n<1) throw "Number to generate is too low";
+			if(n==1) {
+				message.innerHTML="The random number is "+Math.floor((Math.random()*(upper-lower+1))+lower);
+			}
+			else {
+				message.innerHTML="The random numbers are "+Math.floor((Math.random()*(upper-lower+1))+lower);
+				for(i=0;i<n-1;i++) {
+					message.innerHTML+=", " + Math.floor((Math.random()*(upper-lower))+lower+1);
+				}
+			}
+			message.innerHTML+="."
+		}
+		catch(e) {
+			message.innerHTML=e;
+		}
+	}
+	</script>
+</body>
+<html>
