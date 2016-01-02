@@ -1,0 +1,5 @@
+git submit insctuctions
+git add —-all
+git commit -m “comment here”
+git push -u origin master
+	enter username and password
