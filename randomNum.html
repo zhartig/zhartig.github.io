@@ -15,46 +15,66 @@
 </head>
 <body>
 	<h1>Random Number Generator</h1>
-	<p>Lower Bound: <input id="lowerBound" type="text" value="1"><br></p>
-	<p>Upper Bound: <input id="upperBound" type="text" value="6"><br></p>
-	<p>Number to generate: <input id="num" type="text" value="1"><br></p>
-	<p><button type="button" onclick="getRand()">Random Number</button><br></p>
-	<p id="randNum"></p>
+	<div>
+		<input type="radio" name="randPre" value="1d2">Coin Flip<br>
+		<input type="radio" name="randPre" value="1d6">One six sided die<br>
+		<input type="radio" name="randPre" value="2d6">Two six sided die<br>
+		<input type="radio" name="randPre" value="1d20">One 20 sided die<br>
+		<input type="radio" name="randPre" value="0d0">Custom generation<br>
+	</div>
 
+	<div>
+		<p>Lower Bound: <input id="lowerBound" type="text" value="1"><br></p>
+		<p>Upper Bound: <input id="upperBound" type="text" value="6"><br></p>
+		<p>Number to generate: <input id="num" type="text" value="1"><br></p>
+		<p><button type="button" onclick="getRand()">Random Number</button><br></p>
+		<p id="randNum"></p>
+	</div>
 	<script>
 	"use strict";
 	function getRand() {
-		var message, n, lower, upper ,i=0;
+		var message, n, lower, upper ,i=0, rad;
 		message=document.getElementById("randNum");
 		message.innerHTML="";
 		lower=document.getElementById("lowerBound").value;
 		upper=document.getElementById("upperBound").value;
 		n=document.getElementById("num").value;
-		try {
-			if(lower=="") throw "Lower field is empty";
-			if(isNaN(lower)) throw "Lower field is not a number";
-			lower=Math.floor(Number(lower));
-			if(upper=="") throw "Upper field is empty";
-			if(isNaN(upper)) throw "Upper field is not a number";
-			upper=Math.floor(Number(upper));
-			if(n=="") throw "Number to generate field is empty";
-			if(isNaN(n)) throw "Number to generate field is not a number";
-			n=Math.floor(Number(n));
-			if(upper<=lower) throw "Upper value is too low";
-			if(n<1) throw "Number to generate is too low";
-			if(n==1) {
-				message.innerHTML="The random number is "+Math.floor((Math.random()*(upper-lower+1))+lower);
+		rad=document.getElementsByName("randPre");
+		for(i=0;i<rad.length;i++) {
+			if(rad[i].checked) {
+				rad=rad[i].value;
+				break;
 			}
-			else {
-				message.innerHTML="The random numbers are "+Math.floor((Math.random()*(upper-lower+1))+lower);
-				for(i=0;i<n-1;i++) {
-					message.innerHTML+=", " + Math.floor((Math.random()*(upper-lower))+lower+1);
-				}
-			}
-			message.innerHTML+="."
 		}
-		catch(e) {
-			message.innerHTML=e;
+		if((typeof rad)=="string") {
+
+		} else {
+			try {
+				if(lower=="") throw "Lower field is empty";
+				if(isNaN(lower)) throw "Lower field is not a number";
+				lower=Math.floor(Number(lower));
+				if(upper=="") throw "Upper field is empty";
+				if(isNaN(upper)) throw "Upper field is not a number";
+				upper=Math.floor(Number(upper));
+				if(n=="") throw "Number to generate field is empty";
+				if(isNaN(n)) throw "Number to generate field is not a number";
+				n=Math.floor(Number(n));
+				if(upper<=lower) throw "Upper value is too low";
+				if(n<1) throw "Number to generate is too low";
+				if(n==1) {
+					message.innerHTML="The random number is "+Math.floor((Math.random()*(upper-lower+1))+lower);
+				}
+				else {
+					message.innerHTML="The random numbers are "+Math.floor((Math.random()*(upper-lower+1))+lower);
+					for(i=0;i<n-1;i++) {
+						message.innerHTML+=", " + Math.floor((Math.random()*(upper-lower	))+lower+1);
+					}
+				}
+				message.innerHTML+="."
+			}
+			catch(e) {
+				message.innerHTML=e;
+			}
 		}
 	}
 	</script>
