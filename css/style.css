@@ -38,3 +38,7 @@ a:active {
 #cust {
 	display:inline-block;
 }
+
+nav {
+	text-align: center;
+}
