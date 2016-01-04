@@ -19,7 +19,7 @@
 		<div id="radios">
 			<p>
 				<input type="radio" name="randPre" value="0d0" checked="checked">Custom generation<br>
-				<input type="radio" name="randPre" value="1d2">Coin Flip        <br>
+				<input type="radio" name="randPre" value="1d2">Coin Flip<br>
 				<input type="radio" name="randPre" value="1d6">One six sided die<br>
 				<input type="radio" name="randPre" value="2d6">Two six sided die<br>
 				<input type="radio" name="randPre" value="1d20">One 20 sided die<br>
@@ -54,11 +54,11 @@
 			if(rad=="1d2"){
 				randHelp(1,2,1,"coin");
 			} else if(rad=="1d6") {
-				randHelp(1,6,1);
+				randHelp(1,6,1,"single");
 			} else if(rad=="2d6") {
 				randHelp(1,6,2,"double");
 			} else if(rad=="1d20") {
-				randHelp(1,20,1);
+				randHelp(1,20,1,"single");
 			} else {
 				throw "Radio error"
 			}
@@ -105,6 +105,9 @@
 				} else {
 					throw "coin flip error"
 				}
+			} else if(extra=="single") {
+				die1=Math.floor((Math.random()*(upper-lower+1))+lower);
+				message.innerHTML="The die rolls to "+die1;
 			} else {
 				throw "extra error"
 			}
