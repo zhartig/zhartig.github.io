@@ -25,3 +25,16 @@ a:active {
 #comment {
 	height:150px;
 }
+
+#main {
+	text-align:center;
+	float:center;
+}
+
+#radios {
+	display:inline-block;
+}
+
+#cust {
+	display:inline-block;
+}

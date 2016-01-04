@@ -15,39 +15,53 @@
 </head>
 <body>
 	<h1>Random Number Generator</h1>
-	<div>
-		<input type="radio" name="randPre" value="1d2">Coin Flip<br>
-		<input type="radio" name="randPre" value="1d6">One six sided die<br>
-		<input type="radio" name="randPre" value="2d6">Two six sided die<br>
-		<input type="radio" name="randPre" value="1d20">One 20 sided die<br>
-		<input type="radio" name="randPre" value="0d0">Custom generation<br>
-	</div>
+	<div id="main">
+		<div id="radios">
+			<p>
+				<input type="radio" name="randPre" value="0d0" checked="checked">Custom generation<br>
+				<input type="radio" name="randPre" value="1d2">Coin Flip        <br>
+				<input type="radio" name="randPre" value="1d6">One six sided die<br>
+				<input type="radio" name="randPre" value="2d6">Two six sided die<br>
+				<input type="radio" name="randPre" value="1d20">One 20 sided die<br>
+			</p>
+		</div>
 
-	<div>
-		<p>Lower Bound: <input id="lowerBound" type="text" value="1"><br></p>
-		<p>Upper Bound: <input id="upperBound" type="text" value="6"><br></p>
-		<p>Number to generate: <input id="num" type="text" value="1"><br></p>
+		<div id="cust">
+			<p>Lower Bound: <input id="lowerBound" type="text" value="1"><br></p>
+			<p>Upper Bound: <input id="upperBound" type="text" value="6"><br></p>
+			<p>Number to generate: <input id="num" type="text" value="1"><br></p>
+		</div>
 		<p><button type="button" onclick="getRand()">Random Number</button><br></p>
 		<p id="randNum"></p>
 	</div>
+
+
 	<script>
 	"use strict";
 	function getRand() {
 		var message, n, lower, upper ,i=0, rad;
-		message=document.getElementById("randNum");
-		message.innerHTML="";
 		lower=document.getElementById("lowerBound").value;
 		upper=document.getElementById("upperBound").value;
 		n=document.getElementById("num").value;
 		rad=document.getElementsByName("randPre");
-		for(i=0;i<rad.length;i++) {
+		for(i=1;i<rad.length;i++) {
 			if(rad[i].checked) {
 				rad=rad[i].value;
 				break;
 			}
 		}
 		if((typeof rad)=="string") {
-
+			if(rad=="1d2"){
+				randHelp(1,2,1,"coin");
+			} else if(rad=="1d6") {
+				randHelp(1,6,1);
+			} else if(rad=="2d6") {
+				randHelp(1,6,2,"double");
+			} else if(rad=="1d20") {
+				randHelp(1,20,1);
+			} else {
+				throw "Radio error"
+			}
 		} else {
 			try {
 				if(lower=="") throw "Lower field is empty";
@@ -61,21 +75,50 @@
 				n=Math.floor(Number(n));
 				if(upper<=lower) throw "Upper value is too low";
 				if(n<1) throw "Number to generate is too low";
-				if(n==1) {
-					message.innerHTML="The random number is "+Math.floor((Math.random()*(upper-lower+1))+lower);
-				}
-				else {
-					message.innerHTML="The random numbers are "+Math.floor((Math.random()*(upper-lower+1))+lower);
-					for(i=0;i<n-1;i++) {
-						message.innerHTML+=", " + Math.floor((Math.random()*(upper-lower	))+lower+1);
-					}
-				}
-				message.innerHTML+="."
+				randHelp(lower,upper,n);
 			}
 			catch(e) {
 				message.innerHTML=e;
 			}
 		}
+	}
+
+	function randHelp(lower,upper,n,extra) {
+		var message, i, die1, die2, tot;
+		message=document.getElementById("randNum");
+		message.innerHTML="";
+		if(extra){
+			if(extra=="double") {
+				die1=Math.floor((Math.random()*(upper-lower+1))+lower);
+				die2=Math.floor((Math.random()*(upper-lower+1))+lower);
+				tot=die1+die2;
+				message.innerHTML="The dice roll to "+die1+" and "+die2+"! For a total of "+tot;
+				if(die1==die2){
+					message.innerHTML+=". <br> It's also doubles";
+				}
+			} else if(extra=="coin") {
+				die1=Math.floor((Math.random()*(upper-lower+1))+lower);
+				if (die1==1){
+					message.innerHTML="It's tails";
+				} else if (die1==2) {
+					message.innerHTML="It's heads";
+				} else {
+					throw "coin flip error"
+				}
+			} else {
+				throw "extra error"
+			}
+		} else {
+			if(n==1) {
+				message.innerHTML="The random number is "+Math.floor((Math.random()*(upper-lower+1))+lower);
+			} else {
+				message.innerHTML="The random numbers are "+Math.floor((Math.random()*(upper-lower+1))+lower);
+				for(i=0;i<n-1;i++) {
+					message.innerHTML+=", " + Math.floor((Math.random()*(upper-lower))+lower+1);
+				}
+			}
+		}
+		message.innerHTML+="."
 	}
 	</script>
 </body>
