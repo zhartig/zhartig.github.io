@@ -1,4 +1,4 @@
-h1,h2,h3,h4,h5,h6,p,form,ul {
+h1,h2,h3,h4,h5,h6,p,form,ul,span {
 	color: #E0E0E0;
 }
 
@@ -22,23 +22,46 @@ a:active {
 	color:white;
 }
 
+input {
+	display: inline;
+}
+
 #comment {
 	height:150px;
 }
 
 #main {
+	margin: auto 25%;
+	display: inline;
 	text-align:center;
 	float:center;
+	vertical-align: top;
 }
 
 #radios {
+	margin:auto;
 	display:inline-block;
+	text-align:left;
+	width:10%;
+	vertical-align: top;
+	margin-left: 10%;
 }
 
 #cust {
+	margin:auto;
 	display:inline-block;
+	text-align:left;
+	width:25%;
+	vertical-align: top;
+}
+
+#img {
+	float:left;
 }
 
 nav {
+
 	text-align: center;
+	margin:auto;
+	float:center;
 }

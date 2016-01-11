@@ -15,17 +15,15 @@
 </head>
 <body>
 	<h1>Random Number Generator</h1>
-	<div id="main">
+	<span id="main">
 		<div id="radios">
-			<p>
+				<br>
 				<input type="radio" name="randPre" value="0d0" checked="checked">Custom generation<br>
 				<input type="radio" name="randPre" value="1d2">Coin Flip<br>
 				<input type="radio" name="randPre" value="1d6">One six sided die<br>
 				<input type="radio" name="randPre" value="2d6">Two six sided die<br>
 				<input type="radio" name="randPre" value="1d20">One 20 sided die<br>
-			</p>
 		</div>
-
 		<div id="cust">
 			<p>Lower Bound: <input id="lowerBound" type="text" value="1"><br></p>
 			<p>Upper Bound: <input id="upperBound" type="text" value="6"><br></p>
@@ -33,7 +31,7 @@
 		</div>
 		<p><button type="button" onclick="getRand()">Random Number</button><br></p>
 		<p id="randNum"></p>
-	</div>
+	</span>
 
 
 	<script>
