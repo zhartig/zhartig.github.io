@@ -1,1 +1,1 @@
-
+For use only for zhartig park messenger app.  Only zhartig.bot.messenger@gmail.com should be granting access using this client
